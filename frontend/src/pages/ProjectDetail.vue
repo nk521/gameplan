@@ -171,6 +171,14 @@ export default {
     tabs() {
       return [
         {
+          name: 'Overview',
+          route: {
+            name: 'ProjectDetailOverview',
+            params: { teamId: this.team.doc.name, projectId: this.projectId },
+          },
+          class: this.tabLinkClasses,
+        },
+        {
           name: 'Tasks',
           route: {
             name: 'ProjectDetailTasks',
@@ -179,9 +187,9 @@ export default {
           class: this.tabLinkClasses,
         },
         {
-          name: 'Overview',
+          name: 'Updates',
           route: {
-            name: 'ProjectDetailOverview',
+            name: 'ProjectDetailUpdate',
             params: { teamId: this.team.doc.name, projectId: this.projectId },
           },
           class: this.tabLinkClasses,
@@ -195,6 +203,8 @@ export default {
       if (link.route.name === $route.name) {
         active = true
       } else if ($route.fullPath === link.route) {
+        active = true
+      } else if ($route.matched.map((r) => r.name).includes(link.route.name)) {
         active = true
       }
 

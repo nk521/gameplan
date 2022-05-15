@@ -23,17 +23,19 @@
    "fieldname": "content",
    "fieldtype": "Text Editor",
    "in_list_view": 1,
-   "label": "Content"
+   "label": "Content",
+   "reqd": 1
   },
   {
    "fieldname": "status",
    "fieldtype": "Data",
-   "label": "Status"
+   "label": "Status",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-02-23 23:38:08.472243",
+ "modified": "2022-05-16 03:13:57.576064",
  "modified_by": "Administrator",
  "module": "Teams",
  "name": "Team Project Status Update",

@@ -66,6 +66,18 @@ const routes = [
             component: () => import('@/pages/ProjectDetailOverview.vue'),
           },
           {
+            name: 'ProjectDetailUpdate',
+            path: 'status-update',
+            component: () => import('@/pages/ProjectDetailUpdate.vue'),
+            children: [
+              {
+                name: 'ProjectDetailUpdateNew',
+                path: 'new',
+                component: () => import('@/pages/ProjectDetailUpdateNew.vue'),
+              }
+            ]
+          },
+          {
             name: 'ProjectDetailTasks',
             path: 'tasks',
             component: () => import('@/pages/ProjectDetailTasks.vue'),
