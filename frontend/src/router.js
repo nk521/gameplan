@@ -78,9 +78,19 @@ const routes = [
             component: () => import('@/pages/ProjectDetailOverview.vue'),
           },
           {
-            name: 'ProjectDetailUpdate',
-            path: 'discussion/:postId?',
-            component: () => import('@/pages/ProjectDetailUpdate.vue'),
+            name: 'ProjectDetailDiscussions',
+            path: 'discussions',
+            component: () => import('@/pages/ProjectDetailDiscussions.vue'),
+          },
+          {
+            name: 'ProjectDetailDiscussionNew',
+            path: 'discussions/new',
+            component: () => import('@/pages/ProjectDetailDiscussionNew.vue'),
+          },
+          {
+            name: 'ProjectDetailDiscussion',
+            path: 'discussion/:postId',
+            component: () => import('@/pages/ProjectDetailDiscussion.vue'),
             props: true,
           },
           {

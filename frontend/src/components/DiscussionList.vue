@@ -5,7 +5,6 @@
         :to="{
           name: this.routeName,
           params: { postId: d.name },
-          replace: true,
         }"
         class="block p-3"
         :class="isActive(d) ? 'bg-gray-100' : 'hover:bg-gray-50'"
