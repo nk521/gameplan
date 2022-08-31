@@ -4,14 +4,14 @@
       <template #target="{ open: openPopover }">
         <div class="relative w-full">
           <div
-            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
           >
-            <FeatherIcon name="search" class="w-4 h-4 text-gray-500" />
+            <FeatherIcon name="search" class="h-4 w-4 text-gray-500" />
           </div>
           <ComboboxInput
             id="search"
             name="search"
-            class="block w-full py-1 pl-10 pr-3 text-sm placeholder-gray-500 bg-gray-100 border border-transparent rounded-md focus:outline-none focus:ring-0 focus:border-gray-100 focus:shadow focus:text-gray-900 focus:placeholder-gray-400 focus:bg-white"
+            class="block w-full rounded-md border border-transparent bg-gray-100 py-1 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-gray-100 focus:bg-white focus:text-gray-900 focus:placeholder-gray-400 focus:shadow focus:outline-none focus:ring-0"
             placeholder="Search"
             type="search"
             autocomplete="off"
@@ -26,35 +26,32 @@
       </template>
       <template #body>
         <ComboboxOptions
-          class="p-1.5 bg-white rounded-md shadow-md rounded-t-none max-h-[14rem] overflow-y-auto"
+          class="max-h-[14rem] overflow-y-auto rounded-md rounded-t-none bg-white p-1.5 shadow-md"
         >
           <ComboboxOption
             as="template"
-            v-for="option in $resources.search.data"
+            v-for="option in $resources.search.data?.docs"
             :key="option.name"
             :value="option"
             v-slot="{ active }"
           >
             <li
               :class="[
-                'px-2.5 py-1.5 rounded-md text-base',
+                'rounded-md px-2.5 py-1.5 text-base',
                 { 'bg-gray-100': active },
               ]"
             >
               <div class="flex items-center justify-between">
                 <div class="text-base font-medium" v-html="option.title" />
-                <span class="text-xs text-gray-600">{{
-                  $dayjs(option.modified).fromNow()
-                }}</span>
               </div>
               <div
-                class="mt-1 text-sm prose-sm prose text-gray-600"
+                class="prose-sm prose mt-1 text-sm text-gray-600"
                 v-html="option.content"
               />
             </li>
           </ComboboxOption>
           <div
-            class="text-base text-gray-600 px-2.5 py-1.5"
+            class="px-2.5 py-1.5 text-base text-gray-600"
             v-if="
               !$resources.search.loading &&
               ($resources.search.data || []).length == 0
@@ -109,8 +106,7 @@ export default {
   },
   resources: {
     search: {
-      method:
-        'gameplan.gameplan.doctype.team_project_discussion.api.search',
+      method: 'gameplan.gameplan.doctype.team_project_discussion.search.search',
       makeParams(query) {
         return { query }
       },
