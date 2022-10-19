@@ -15,18 +15,34 @@ services:
 
   redis:
     image: redis:alpine
+    command: redis-server --save 20 1
+    volumes:
+      - redis-data:/data
 
   frappe:
     image: frappe/bench:latest
-    command: bash /workspace/init.sh
+    command: bash /tmp/init/init.sh
     environment:
-      - SHELL=/bin/bash
+      SHELL: /bin/bash
+      MARIADB_ROOT_PASSWORD: 123
+      BENCH_ADMIN_PASSWORD: admin
+      BENCH_DEVELOPER_MODE: 1
+      BENCH_MUTE_EMAILS: 1
     working_dir: /home/frappe
+    depends_on:
+      - mariadb
+      - redis
     volumes:
-      - .:/workspace
+      - ./init/:/tmp/init/
+      - frappe-bench-data:/home/frappe/
     ports:
       - 8000:8000
       - 9000:9000
 
 volumes:
   mariadb-data:
+    driver: local
+  redis-data:
+    driver: local
+  frappe-bench-data:
+    driver: local
